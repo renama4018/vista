@@ -1,0 +1,7 @@
+{
+  "name": "adl",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic1"
+}
