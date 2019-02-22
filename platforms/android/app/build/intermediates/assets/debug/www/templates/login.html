@@ -1,0 +1,29 @@
+<ion-view class="login" hide-nav-bar="true">
+  <div class="loginbg">
+    <ion-content>
+      <div class="logo"><img src="img/logo.png" border="0" /></div>
+      <form name="loginData" ng-submit="doLogin(loginData)">
+        <div class="list logicard">
+
+          <label class="item item-input custom-input item-stacked-label">
+            <i class="icon ion-person placeholder-icon"></i>
+            <span class="input-label">Username</span>
+            <input type="text" ng-model="loginData.username" required>
+          </label>
+
+          <label class="item item-input custom-input item-stacked-label">
+            <i class="icon ion-locked placeholder-icon"></i>
+            <span class="input-label">Password</span>
+            <input type="password" ng-model="loginData.password" required>
+          </label>
+          <div class="centerdiv">
+            <br />
+            <a class="button button-dark" ng-href="#/app/password">&nbsp;&nbsp;Reset Password&nbsp;&nbsp;</a>
+            <button class="button button-positive" type="submit">&nbsp;&nbsp;Login&nbsp;&nbsp;</button>
+            
+          </div>
+        </div>
+      </form>
+    </ion-content>
+  </div>
+</ion-view>

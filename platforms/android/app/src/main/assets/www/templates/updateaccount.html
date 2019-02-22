@@ -1,0 +1,27 @@
+<ion-view title="Update Account" class="updateAccount" ng-init="prepopulateAccount()" xhide-back-button="true">
+  <ion-content xdata-tap-disabled="true">
+    <div class="welcomescreen">
+      <form name="accountData" ng-submit="updateUser(accountpreData)">
+        <div class="list">
+          <label class="item item-input custom-input item-stacked-label">
+          <i class="icon ion-person placeholder-icon"></i>
+            <span class="input-label">Username</span>
+            <input type="text" ng-model="accountpreData.username" id="updateUsername" required>
+          </label>
+          <label class="item item-input custom-input item-stacked-label">
+            <i class="icon ion-email placeholder-icon"></i>
+            <span class="input-label">E-mail Address</span>
+            <input type="email" id="UpdateEmailAddress" ng-model="accountpreData.email" required ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/">
+          </label>
+          
+          <div class="centerdiv">
+            <br />
+            <a class="button button-dark" ng-href="#/app/password">&nbsp;&nbsp;Reset Password&nbsp;&nbsp;</a>
+            <button class="button button-positive grad" ng-disabled="accountData.$invalid" type="submit">Update Details</button>    
+          </div>
+        </div>
+      </form>
+      
+    </div>
+  </ion-content>
+</ion-view>

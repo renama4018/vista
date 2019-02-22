@@ -1,0 +1,4 @@
+#Tue Feb 05 11:26:09 WAT 2019
+base.0=/www/home/wwwroot/2017mobileapps/adl/platforms/android/app/build/intermediates/transforms/dex/release/0
+renamed.0=classes.dex
+file.0=/www/home/wwwroot/2017mobileapps/adl/platforms/android/app/build/intermediates/transforms/dex/release/0/classes.dex

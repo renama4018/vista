@@ -1,0 +1,29 @@
+<ion-view title="Dashboard" class="dashboard" hide-back-button="true" ng-init="userStatus();buildForm()">
+  <ion-content xdata-tap-disabled="true">
+    <div class="welcomescreen">
+      <div class="welcomebody">
+        <div class="row">
+          <div class="col">
+            <a class="button button-block button-positive" ng-href="#/app/add">Add Report</a>
+          </div>
+        </div>
+        <div class="row" ng-show="editReports">
+          <div class="col">
+            <a class="button button-block button-navy" ng-href="#/app/search">Edit Report</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <a class="button button-block button-dark" ng-href="#/app/drafts">View Saved Drafts</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <a class="button button-block button-dark button-outline" ng-href="#/app/updateaccount">Update Account Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+

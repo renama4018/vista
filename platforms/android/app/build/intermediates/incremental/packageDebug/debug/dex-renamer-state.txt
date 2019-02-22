@@ -1,0 +1,4 @@
+#Tue Feb 12 21:23:37 WAT 2019
+base.0=/www/home/wwwroot/2019mobileapps/rea/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
+renamed.0=classes.dex
+file.0=/www/home/wwwroot/2019mobileapps/rea/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex

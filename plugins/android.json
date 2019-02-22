@@ -1,0 +1,57 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.ionicframework.adl498466"
+    },
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "com.ionicframework.adl498466"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.ionicframework.adl498466"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.ionicframework.adl498466"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.ionicframework.adl498466"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.ionicframework.adl498466"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.ionicframework.adl498466"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.ionicframework.adl498466"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.ionicframework.adl498466"
+    },
+    "cordova-plugin-locationservices": {
+      "PACKAGE_NAME": "com.ionicframework.adl498466"
+    },
+    "cordova-plugin-request-location-accuracy": {
+      "PACKAGE_NAME": "com.ionicframework.adl498466"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.ionicframework.adl498466"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.ionicframework.adl498466"
+    },
+    "cordova-plugin-webserver": {
+      "PACKAGE_NAME": "com.ionicframework.adl498466"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.ionicframework.adl498466"
+    }
+  },
+  "dependent_plugins": {}
+}

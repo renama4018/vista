@@ -1,0 +1,169 @@
+<ion-view ng-init="initSlider();cleanForm();getDraftCount();getLocation('N');" class="dashboard" view-title="New Report">  
+  <form name="reportData" class="reportForm" >
+  <ion-content>
+    
+    <div class="button-bar" style="padding:5px;">
+      <a class="button button-dark button-outline" ng-disabled="reportFormStep == 0" ng-click="formStep('-', 'add')">&laquo; Prev</a>
+      <a class="button button-dark button-outline" ng-disabled="reportFormStep == reportFormStepLength" ng-click="formStep('+', 'add')">Next &raquo;</a>
+    </div>
+  
+    <div class="pageheader">
+      
+   
+       
+        <!-- <div id="addstep{{$index}}" class="step" style="display: {{currentStepStyle[$index]}} !important;" ng-repeat="(key, value) in reportForm | groupBy: 'group' | toArray:true | orderBy:min | filterFormFields:toggleFieldValue"> -->
+
+         
+        <div id="addstep{{$index}}" class="step" style="display: {{currentStepStyle[$index]}} !important;" ng-repeat="(key, value) in reportForm | filterFormFields:toggleFieldValue">
+           <div ng-repeat="field in value" class="childstep parentweight{{field.parentweight}} groupweight{{field.groupweight}}" parent="{{field.groupparent}}">
+          
+            <div ng-if="field.type == 'text'">
+
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">{{field.label}} <span class="requireddiv" ng-if="field.required">*</span></span>
+                <input type="text" id="{{field.name}}" ng-model="reportData.fields[field.name]" ng-required={{field.required}} > 
+              </label>
+            </div>
+
+            
+            <div ng-if="field.type == 'datestamp'">
+              <div ng-if="field.name == 'field_time_in' || field.name == 'field_time_out'">
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label">{{field.label}} <span class="requireddiv" ng-if="field.required">*</span></span>
+                  <div class="clockDiv">{{(reportDataTime[field.name] | date:'mediumTime') || '00:00:00'}}</div>
+
+                  <input type="hidden" id="{{field.name}}" ng-model="reportData.fields[field.name]" ng-value="reportDataTime[field.name]" ng-required={{field.required}} > 
+
+
+                </label>
+                <button class="button button-balanced button-block" ng-click="setReportTime(field.name)" type="button">Punch {{field.label}}</button>
+              </div>
+              <div ng-if="field.name != 'field_time_in' && field.name != 'field_time_out'">
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label">{{field.label}} <span class="requireddiv" ng-if="field.required">*</span></span>
+                  <input id="{{field.name}}" displayFormat="DD/MM/YYYY hh:mm a" type="datetime-local" ng-blur="setUnixTime(field.name)" ng-model="reportData.fields[field.name]">
+                  <!--
+                  <div class="clockDiv">{{(reportDataTime[field.name] | date:'d/M/y h:mm a') || ''}}</div>
+                  
+                  <input type="hidden" id="{{field.name}}" ng-model="reportData.fields[field.name]" ng-value="reportDataTime[field.name]" ng-required={{field.required}} > 
+                  -->
+
+                </label>
+              </div>
+            </div>
+
+
+            <div ng-if="(field.type == 'number_float' || field.type == 'number_integer') && field.groupid != 'geo'">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">{{field.label}} <span class="requireddiv" ng-if="field.required">*</span></span>
+                <input type="number" id="{{field.name}}" ng-model="reportData.fields[field.name]" ng-required={{field.required}} > 
+              </label>
+            </div>
+
+            <div ng-if="field.type == 'list_text' || field.type == 'node_reference'">
+              <label class="item item-input item-select ">
+                    <span class="input-label">{{field.label}} <span class="requireddiv" ng-if="field.required">*</span></span>
+                    <select id="field.name" ng-model="reportData.fields[field.name]" ng-required={{field.required}} ng-change="toggleFields(field.name, reportData.fields[field.name])">
+                        <option value="" ng-selected="true"> </option>
+                        <option ng-repeat="(key, value) in field.listoptions"
+                                value="{{key}}">
+                          {{value}}
+                        </option>
+                    </select>
+                </label>
+            </div>
+            <div ng-if="field.type == 'image' && field.groupid != 'signature'">
+              <label class="item item-input item-stacked-label">
+                
+                    <span class="input-label">{{field.label}} <span class="requireddiv" ng-if="field.required">*</span></span>
+                    <button class="button button-stable button-block" ng-disabled="reportURI[field.name].length >= field.maxcount" ng-click="takePhoto(field.name)" type="button">Take up to {{field.maxcount}} Photo(s)  <i class="icon ion-camera">&nbsp;</i></button>
+                    
+                  
+              </label>
+            <!--
+              <div class="instructions" ng-if="field.name == 'field_pre_activity_photo_s_'" ng-bind-html="thisInstruction.preinstructions"></div>
+              <div class="instructions" ng-if="field.name == 'field_post_activity_photo_s_'" ng-bind-html="thisInstruction.postinstructions"></div>
+            -->
+              <div class="imgbox" ng-repeat="img in reportURI[field.name]" >
+                <div class="imgthumb" ng-click="previewImg($index, field.name)">
+                  <img ng-src="{{img}}"  width="50" >
+                </div>
+              </div>
+              <div class="button-bar" ng-show="showImgButtons[field.name]">
+                <button ng-click="deletePic(field.name)" class="button-assertive button">Delete Photo</button>
+                <button ng-click="closePicPreview()" class="button-dark button">Close Preview</button>
+              </div>
+              <div class="imgpreview" ng-show="showLoader[field.name]">
+                <img ng-src={{imgPreview}} width="100%" />
+              </div>
+              
+            </div>
+            <div ng-if="field.type == 'image' && field.groupid == 'signature'" >
+              <label class="item item-input item-stacked-label">
+                
+                <span class="input-label">{{field.label}} <span class="requireddiv" ng-if="field.required">*</span></span>
+                <div class="signature-pad">
+
+                  <canvas canvas-dir id="{{field.name}}" width='300' height='180' style='border: 1px dotted #999;'></canvas>
+                </div>
+            
+                <div class="centerdiv">
+                  <button class="button button-stable button-block" ng-click="clearCanvas(field.name)" type="button">Clear</button>
+                  
+                </div>
+                  
+              </label>
+              
+              
+            </div>
+            <div ng-if="field.type == 'text_long'">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">{{field.label}} <span class="requireddiv" ng-if="field.required">*</span></span>
+                <textarea id="field.name" ng-model="reportData.fields[field.name]" rows="5" ng-required={{field.required}}></textarea>
+                
+              </label>
+              
+            </div>
+
+
+            <div class="instructions" ng-bind-html="field.instructions"></div>
+          </div>
+
+
+
+          <!-- <div ng-if="value[0].groupid == 'geo' && (!reportLat || reportLat == '')"> -->
+            
+          <div ng-if="value[0].groupid == 'geo'">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">GPS Location</span>
+              <input type="text" value="{{reportLat}} {{reportLon}}" disabled>
+            </label>
+            <div style="font-weight:bold;font-style:italic;margin:10px 0;">Please click the "Update Location" (when you are at the report location) button below if your  GPS location is blank</div>
+            <div class="centerdiv">
+              <button class="button button-stable button-block" ng-click="getLocation()" type="button" xng-show="reportData.lat == 0">Update Location</button>
+              
+            </div>
+          </div>
+          <div class="requireddiv">* Required</div>
+          
+        </div>
+      
+      <input type="hidden" ng-model="draftCount" ng-value="{{draftCount}}" />
+      
+      
+    
+   
+      
+  </div>
+
+  </ion-content>
+  
+  <div class="bar bar-footer">
+    <div class="button-bar">
+      <button class="button button-positive" ng-click="saveDraft(reportData)" type="button">Save Draft &raquo;</button>
+      <button class="button button-balanced" ng-show="reportFormStep == reportFormStepLength" type="button" ng-click="newReport(reportData)">Submit Now &raquo;</button> 
+      <!-- <button class="button button-balanced" type="button" ng-click="newReport(reportData)">Submit Now (Web) &raquo;</button> -->
+    </div>
+  </div>
+   </form>
+</ion-view>
