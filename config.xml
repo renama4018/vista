@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.yokesolutions.reaminigrid" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>REA Mini-Grid Survey</name>
-    <description>REA Mini-Grid Survey</description>
+<widget id="com.yokesolutions.vsurvey" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>V-Survey</name>
+    <description>Vista Advisory Partners - Field Survey Tool</description>
     <author email="hi@yokesolutions.com" href="http://www.yokesolutions.com/">Yoke Solutions Limited</author>
     <content src="index.html" />
     <access origin="*" />
